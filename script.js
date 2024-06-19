@@ -35,3 +35,12 @@ function operate(operator, firtstNum, secondNum) {
       break;
   }
 }
+
+const display = document.querySelector("#display");
+const input= document.querySelector("#input");
+
+input.addEventListener("click", (event) => {
+  let target = event.target;
+  if (target.nodeName === "BUTTON") display.textContent += target.textContent;
+
+} )
