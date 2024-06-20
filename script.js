@@ -38,9 +38,31 @@ function operate(operator, firtstNum, secondNum) {
 
 const display = document.querySelector("#display");
 const input= document.querySelector("#input");
+let displayValue = [];
+let operators = [];
 
-input.addEventListener("click", (event) => {
+input.addEventListener("click", (event) => clickHandler(event));
+
+function getInput(event) {
   let target = event.target;
-  if (target.nodeName === "BUTTON") display.textContent += target.textContent;
 
-} )
+  if (target.nodeName === "BUTTON") {
+    if (target.className === "operators") {
+      operators.push(target.id);
+      display.textContent += ` ${target.textContent} `;
+    } else {
+      displayValue.push(target.textContent);
+      display.textContent += target.textContent;
+    }
+  }
+}
+
+function calculate(operator, firtstNum, secondNum) {
+  if (operator === "=") {
+    operate(operator, firtstNum, secondNum);
+  }
+}
+
+function clickHandler(event) {
+  getInput(event);
+}
