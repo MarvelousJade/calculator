@@ -13,56 +13,75 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
-console.log(divide(6, 2));
 
-let firtstNum;
-let operator;
-let secondNum;
+let firstNum = "";
+let operator = "";
+let secondNum = "";
 
-function operate(operator, firtstNum, secondNum) {
+function operate(operator, firstNum, secondNum) {
+  a = parseInt(firstNum);
+  b = parseInt(secondNum);
+
   switch(operator) {
     case "+":
-      add(firtstNum, secondNum);
-      break;
+      return add(a, b);
     case "-":
-      subtract(firtstNum, secondNum);
-      break;
+      return subtract(a, b);
     case "*":
-      multiply(firtstNum, secondNum);
-      break;
+      return multiply(a, b);
     case "/":
-      divide(firtstNum, secondNum);
-      break;
+      return divide(a, b);
   }
 }
 
-const display = document.querySelector("#display");
+const displayExpression = document.querySelector("#displayExpression");
+const displayNum = document.querySelector("#displayNum")
 const input= document.querySelector("#input");
-let displayValue = [];
-let operators = [];
 
 input.addEventListener("click", (event) => clickHandler(event));
 
-function getInput(event) {
-  let target = event.target;
+function calculate(operator, firstNumber, secondNumber) {
+  return operate(operator, firstNumber, secondNumber);
+}
 
-  if (target.nodeName === "BUTTON") {
-    if (target.className === "operators") {
-      operators.push(target.id);
-      display.textContent += ` ${target.textContent} `;
+function getNumber(target) {
+  if (target.className === "digitals") {
+    displayNum.textContent += target.textContent; 
+  } 
+
+  if (displayNum.textContent != "" && target.className === "operators") {
+    if (firstNum === "") {
+      firstNum = displayNum.textContent;
     } else {
-      displayValue.push(target.textContent);
-      display.textContent += target.textContent;
+      secondNum = displayNum.textContent;
+    }
+    displayNum.textContent = "";
+  }
+}
+
+let isCalculatable;
+
+function getOperator(target) {
+  isCalculatable = firstNum != "" && secondNum != "" && operator != "";
+
+  if (target.className === "operators") {
+    if (isCalculatable) {
+      displayNum.textContent = calculate(operator, firstNum, secondNum);
+      firstNum = displayNum.textContent;
+      secondNum = ""; 
+      operator = target.id; 
+    } else {
+      if (target.id != "=") {
+        operator = target.id;
+        displayExpression.textContent = firstNum + ` ${target.textContent} ` 
+      }
     }
   }
 }
 
-function calculate(operator, firtstNum, secondNum) {
-  if (operator === "=") {
-    operate(operator, firtstNum, secondNum);
-  }
-}
-
 function clickHandler(event) {
-  getInput(event);
+  let target = event.target;
+
+  getNumber(target);
+  getOperator(target);
 }
