@@ -66,8 +66,12 @@ function getOperator(target) {
 
   if (target.className === "operators") {
     if (isCalculatable) {
-      displayNum.textContent = calculate(operator, firstNum, secondNum);
-      firstNum = displayNum.textContent;
+      if (target.id === "=") {
+        displayExpression.textContent = `${firstNum} ${operator} ${secondNum} = ${calculate(operator, firstNum, secondNum)}`;
+      } else {
+        displayExpression.textContent = `${calculate(operator, firstNum, secondNum)} ${operator} `;
+      }
+      firstNum = calculate(operator, firstNum, secondNum);
       secondNum = ""; 
       operator = target.id; 
     } else {
