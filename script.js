@@ -36,9 +36,9 @@ function operate(operator, firstNum, secondNum) {
 
 const displayExpression = document.querySelector("#displayExpression");
 const displayNum = document.querySelector("#displayNum")
-const input= document.querySelector("#input");
+const outline= document.querySelector("#outline");
 
-input.addEventListener("click", (event) => clickHandler(event));
+outline.addEventListener("click", (event) => clickHandler(event));
 
 function calculate(operator, firstNumber, secondNumber) {
   return operate(operator, firstNumber, secondNumber);
@@ -83,9 +83,20 @@ function getOperator(target) {
   }
 }
 
+function clear(target) {
+  if (target.id === "clear") {
+    firstNum = "";
+    secondNum = "";
+    operator = "";
+    displayExpression.textContent = "";
+    displayNum.textContent = "";
+  }
+}
+
 function clickHandler(event) {
   let target = event.target;
 
   getNumber(target);
   getOperator(target);
+  clear(target);
 }
