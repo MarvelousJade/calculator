@@ -93,10 +93,17 @@ function clear(target) {
   }
 }
 
+function deleteNum(target) {
+  if (target.id === "delete") {
+    displayNum.textContent = displayNum.textContent.slice(0, -1);
+  }
+}
+
 function clickHandler(event) {
   let target = event.target;
 
   getNumber(target);
   getOperator(target);
   clear(target);
+  deleteNum(target);
 }
