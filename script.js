@@ -36,9 +36,9 @@ function operate(operator, firstNum, secondNum) {
 
 const displayExpression = document.querySelector("#displayExpression");
 const displayNum = document.querySelector("#displayNum")
-const outline= document.querySelector("#outline");
+const calculator= document.querySelector("#calculator");
 
-outline.addEventListener("click", (event) => clickHandler(event));
+calculator.addEventListener("click", (event) => clickHandler(event));
 
 function calculate(operator, firstNumber, secondNumber) {
   return operate(operator, firstNumber, secondNumber);
@@ -49,7 +49,8 @@ function getNumber(target) {
     displayNum.textContent += target.textContent; 
   } 
 
-  if (displayNum.textContent != "" && target.className === "operators") {
+  isFirstNumExisted = target.id === "=" && firstNum != "";  
+  if (displayNum.textContent != "" && target.className === "operators" && (target.id != "=" || isFirstNumExisted)) {
     if (firstNum === "") {
       firstNum = displayNum.textContent;
     } else {
