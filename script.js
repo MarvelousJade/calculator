@@ -19,8 +19,8 @@ let operator = "";
 let secondNum = "";
 
 function operate(operator, firstNum, secondNum) {
-  a = parseInt(firstNum);
-  b = parseInt(secondNum);
+  a = parseFloat(firstNum);
+  b = parseFloat(secondNum);
 
   switch(operator) {
     case "+":
