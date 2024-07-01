@@ -27,7 +27,7 @@ body {
   margin: 100px;
   padding: 16px;
   justify-content: space-around;
-  background-color: cornflowerblue;
+  background-color: #a2bbcf;
 }
 
 button:hover {background-color: #c6c7c6}
