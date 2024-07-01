@@ -45,7 +45,7 @@ function calculate(operator, firstNumber, secondNumber) {
 }
 
 function getNumber(target) {
-  if (target.className === "digitals") {
+  if (target.className === "digitals" || (target.id === "decimalPoint" && !displayNum.textContent.includes("."))) {
     displayNum.textContent += target.textContent; 
   } 
 
